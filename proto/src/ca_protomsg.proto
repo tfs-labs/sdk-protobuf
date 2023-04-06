@@ -1,0 +1,133 @@
+syntax = "proto3";
+
+/*************************************      *************************************/
+/*************************************Transaction-related agreements*************************************/
+import "sign.proto";
+
+
+message SignNodeMsg
+{
+	string id   = 1;  
+	bytes sign	= 2;  
+	bytes pub   = 3;  
+}
+
+message TxMsgInfo
+{
+  uint32    type = 1;  
+  bytes     tx = 2;  
+  uint64    height = 3;  
+}
+
+ 
+message TxMsgReq
+{
+  string       version              = 1;  
+  TxMsgInfo    txMsgInfo            = 2;
+  Vrf      vrfInfo              = 3;
+  Vrf      txvrfInfo              = 4;
+	repeated SignNodeMsg signNodeMsg  = 5;   
+	repeated string prevBlkHashs      = 6;	 
+
+}
+
+message Vrf
+{
+  string data = 1;
+  CSign  Vrfsign = 2;
+}
+
+message TxMsgAck
+{
+  string version = 1;  
+  int32 code = 2;  
+  string message = 3;  
+
+  bytes tx = 4;
+}
+
+message BuildBlockBroadcastMsg
+{
+  string      version         = 1;                          
+  string      id              = 2;
+	bytes 		  blockRaw		    = 3;				          		 
+  Vrf         vrfInfo         = 4;
+  int32       flag            = 5;
+  int32       type            = 6;
+  repeated string      castAddrs     = 7;
+}
+
+message BuildBlockBroadcastMsgAck 
+{
+  string version          = 1;
+  string id               = 2;
+  string success          = 3;
+  string blockhash		    = 4;				          		 
+}
+
+
+message TxPendingBroadcastMsg
+{
+    string version          = 1;  
+    bytes txRaw             = 2;  
+	  uint64 prevBlkHeight    = 3;  
+}
+
+
+
+/***************************        *************************************/
+/***************************Verify the transaction confirmation interface*************************************/
+
+enum ConfirmCacheFlag
+{
+  ConfirmUnknownFlag = 0;
+  ConfirmTxFlag = 1;
+  ConfirmRpcFlag = 2;
+}
+
+message ConfirmTransactionReq 
+{
+  string version = 1;
+  string id = 2;
+  string tx_hash = 3;
+  ConfirmCacheFlag flag = 4;
+}
+
+message ConfirmTransactionAck 
+{
+  string version = 1;
+  string id = 2;
+  string tx_hash = 3;
+  ConfirmCacheFlag flag = 4;
+  bool success = 5;
+  bytes block_raw = 6;
+}
+
+
+
+/***************************        *************************************/
+/***************************Verify the transaction confirmation interface*************************************/
+
+
+
+message ConfirmTransactionIsSuccessReq 
+{
+  string version = 1;
+  string id = 2;
+  bytes block_raw = 3;
+}
+
+message ConfirmTransactionIsSuccessAck 
+{
+  string version = 1;
+  string id = 2;
+  string success = 3;
+  bytes block_raw = 4;
+}
+
+message FailureBroadcastMsg
+{
+	string  version = 1;   
+	bytes   tx = 		 2;	 
+  string  info = 3;
+}
