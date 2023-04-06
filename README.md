@@ -1,3 +1,7 @@
+# Abort
+
+This SDK is used for dropshipping transactions
+
 
 # Initialization
 
