@@ -8,7 +8,6 @@
 #include "common/global.h"
 #include "proto/sdk.pb.h"
 #include "utils/MagicSingleton.h"
-//#include "utils/base64_2.h"
 #include "utils/bip39.h"
 #include "utils/console.h"
 #include "utils/hexcode.h"
@@ -41,7 +40,6 @@
 
 #include "ca/ca.h"
 #include "ca/jcAPI.h"
-#include "error_define.h"
 
 thread_local std::pair<int, std::string> er_msg;
 
