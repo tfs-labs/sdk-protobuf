@@ -51,14 +51,6 @@ void init(const char *path, int size) {
   InitAccount(path_.data(), path_.size());
 }
 
-void show(const char *ip, int size_ip, int port) {
-  std::string ip_(ip, size_ip);
-  ReturnData *data = MagicSingleton<Recver>::GetInstance()->newCodeData(SHOW_);
-  data->netWork.connect(ip_, port);
-  require_balance_height(SHOW_);
-  MagicSingleton<Recver>::GetInstance()->close(SHOW_);
-  MagicSingleton<Recver>::GetInstance()->freeCodeData(SHOW_);
-}
 
 bool Transaction(const char *addr, int size_addr, const char *toAddr,
                  int size_toAddr, const char *num, int num_size, const char *ip,

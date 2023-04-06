@@ -52,8 +52,6 @@ int main(int argc, char *argv[])
 		}
 		break;
 		case 1:
-
-			show(ip.c_str(), ip.size(), 11182);
 			break;
 		case 2:
 		{
